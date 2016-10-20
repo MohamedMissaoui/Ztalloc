@@ -1,0 +1,103 @@
+package p1;
+
+public class main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+
+//		Zta zta = new Zta(1);
+//
+//		initialiser(zta, zta.getValeur());
+	
+		
+		Fenetre f = new Fenetre();
+		
+		//Fenetre2 f2 = new Fenetre2(zta);
+
+
+
+	}
+
+	
+	public static final int MAX_PROFONDEUR = 6;
+	public static final int MAX_LARGEUR = 3;
+	public static int max2 = 0;
+
+	public static void initialiser(Zta nombre, int val) {
+
+		if (nombre.getProfondeur() < MAX_PROFONDEUR) {
+			if (val % 3 != 0) {
+
+				if (val % 3 == 1 && val % 2 == 0) {
+
+					if (val != 13 && val != 4 && val != 2 && val != 1) {
+
+						Zta zta = new Zta((val - 1) / 3,
+								nombre.getProfondeur() + 1);
+						
+						if (nombre.getL().size() < MAX_LARGEUR) {
+							nombre.getL().add(zta);
+							initialiser(zta, zta.getValeur());
+							
+						}
+					}
+				}
+
+				if (max2 < 20 && nombre.getL().size() < MAX_LARGEUR) {
+					max2++;
+					initialiser(nombre, val * 2);
+				}
+
+				max2 = 0;
+			}
+		}
+
+	}
+	/* Version correct~
+	public static void initialiser(Zta nombre, int val) {
+
+		if (nombre.getProfondeur() < MAX_LONGUEUR) {
+			if (val % 3 != 0) {
+
+				if (val % 3 == 1 && val % 2 == 0) {
+
+					if (val != 13 && val != 4 && val != 2 && val != 1) {
+
+						Zta zta = new Zta((val - 1) / 3,
+								nombre.getProfondeur() + 1);
+						nombre.getL().add(zta);
+						if (nombre.getL().size() < MAX_LARGEUR) {
+							initialiser(zta, zta.getValeur());
+							
+						}
+					}
+				}
+
+				if (max2 < 20 && nombre.getL().size() < MAX_LARGEUR) {
+					max2++;
+					initialiser(nombre, val * 2);
+				}
+
+				max2 = 0;
+			}
+		}
+
+	}*/
+	
+/*
+	public static void afficher(Zta zta) {
+		if (zta.getProfondeur() == 0)
+			System.out.println(zta.getValeur() + "," + zta.getProfondeur());
+		for (Zta z : zta.getL()) {
+			System.out.println(z.getValeur() + "," + z.getProfondeur() + " ");
+			afficher(z);
+		}
+
+	}
+	*/
+
+}

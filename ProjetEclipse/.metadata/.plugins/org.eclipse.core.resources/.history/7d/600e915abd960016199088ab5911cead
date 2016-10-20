@@ -1,0 +1,100 @@
+package p1;
+
+import java.util.Map;
+
+import javax.swing.JFrame;
+
+import org.jgraph.JGraph;
+
+import com.jgraph.layout.JGraphFacade;
+import com.jgraph.layout.tree.JGraphRadialTreeLayout;
+import com.mxgraph.layout.mxParallelEdgeLayout;
+import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.view.mxGraph;
+
+public class Fenetre2 extends JFrame {
+
+	
+	private static final long serialVersionUID = 1L;
+	
+	public static final int LONGUEUR = 60;
+	public static final int LARGEUR = 20;
+
+	public Fenetre2(Zta z) {
+		super();
+		
+	//	mxGraph graph = generer(z);
+		JGraph graph = new JGraph();
+		
+		
+		
+		
+		//mxCircleLayout
+		final JGraphFacade graphFacade = new JGraphFacade(graph);
+		
+		JGraphRadialTreeLayout layout = new JGraphRadialTreeLayout();
+		layout.run(graphFacade);
+		final Map nestedMap = graphFacade.createNestedMap(true, true);
+		graph.getGraphLayoutCache().edit(nestedMap);
+		
+		
+	
+       // mxGraphComponent graphComponent = new mxGraphComponent(graph);
+		
+		this.setTitle("Ztalloc");
+		this.setSize(1600, 900);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		this.add(graph);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		this.setVisible(true);
+	}
+	
+	private mxGraph generer(Zta z){
+		mxGraph graph = new mxGraph();
+		
+        graph.getModel().beginUpdate();
+       
+        remplir(graph, z, null);
+        
+        graph.getModel().endUpdate();
+        
+        return graph;
+		
+	}
+	
+	private mxGraph remplir(mxGraph graph, Zta zta, Object premier){
+
+		Object parent = graph.getDefaultParent();
+		if(premier == null){
+			premier = graph.insertVertex(parent, null, zta.getValeur()+";("+zta.getProfondeur()+")", 0, 0, LONGUEUR,
+                LARGEUR);
+		}
+		
+	
+		
+		for(Zta z : zta.getL()){
+			Object suivant = graph.insertVertex(parent, null, z.getValeur()+";("+z.getProfondeur()+")", 0, 0, LONGUEUR,
+                 LARGEUR);
+			graph.insertEdge(parent, null, "", premier, suivant);
+			remplir(graph, z, suivant);
+		}
+     
+         
+		
+		return graph;
+	}
+	
+	
+
+}
