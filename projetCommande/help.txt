@@ -1,0 +1,12 @@
+pour compiler :
+javac Ztalloc.java Zta.java
+
+pour executer : 
+java Ztalloc
+
+suivi des arguments nécessaires :
+En premier dot ou txt pour choisir l'écriture désiré
+
+En deuxième algo1 suivi de la profondeur et de la largeur maximum de la recherche
+ou algo2 suivi du nombre le plus grand recherché
+
