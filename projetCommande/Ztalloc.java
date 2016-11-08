@@ -152,7 +152,7 @@ public class Ztalloc {
 	
 	public static void affichageDOT(Zta zta, int maxProfondeur){
 		//debut
-		System.out.println("digraph graph {");
+		System.out.println("digraph mongraph {");
 		
 		ArrayList<Zta>[] tabProfondeur = new ArrayList[maxProfondeur];
 
