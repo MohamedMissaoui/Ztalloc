@@ -48,7 +48,7 @@ public class Ztalloc {
 						initialiser(z, 1, Integer.parseInt(args[2]));
 						
 						int prof = recupereMaxProf(z, 0);
-						System.out.println("prof = "+prof);
+						//System.out.println("prof = "+prof);
 						afficher(z, prof);
 					} else {
 						System.out
@@ -61,6 +61,38 @@ public class Ztalloc {
 				}
 				break;
 			case "dot":
+				switch (args[1]) {
+				case "algo1":
+					if (args.length > 3) {
+						Zta z = new Zta(1);
+
+						initialiser(z, 1, Integer.parseInt(args[2]),
+								Integer.parseInt(args[3]));
+
+						affichageDOT(z, Integer.parseInt(args[2]));
+					} else {
+						System.out
+								.println("rentrez la profondeur et la largeur souhaités, deux arguments nécessaires");
+					}
+					break;
+				case "algo2":
+					if (args.length > 2) {
+						Zta z = new Zta(1);
+
+						initialiser(z, 1, Integer.parseInt(args[2]));
+						
+						int prof = recupereMaxProf(z, 0);
+						//System.out.println("prof = "+prof);
+						affichageDOT(z, prof);
+					} else {
+						System.out
+								.println("rentrez la valeur maximum, un arguments nécessaire");
+					}
+					break;
+				default:
+
+					break;
+				}
 				break;
 			default:
 				System.out
@@ -117,6 +149,34 @@ public class Ztalloc {
 		}
 
 	}
+	
+	public static void affichageDOT(Zta zta, int maxProfondeur){
+		//debut
+		System.out.println("digraph graph {");
+		
+		ArrayList<Zta>[] tabProfondeur = new ArrayList[maxProfondeur];
+
+		for (int j = 0; j < maxProfondeur; j++) {
+			tabProfondeur[j] = new ArrayList<Zta>();
+		}
+
+		remplir(zta, tabProfondeur);
+		
+		for(Zta z : zta.getL()){
+			System.out.println("  " + zta.getValeur() + " -> " + z.getValeur()+";");
+		}
+		
+		for (int i = 0; i < maxProfondeur; i++) {
+			for (Zta z : tabProfondeur[i]) {
+				for(Zta z2 : z.getL()){
+					System.out.println("  " + z.getValeur() + " -> " + z2.getValeur()+";");
+				}
+			}
+		}
+		
+		//fin
+		System.out.println("}");
+	}
 
 	static int max2 = 0;
 
@@ -155,19 +215,19 @@ public class Ztalloc {
 
 	public static void initialiser(Zta nombre, int val, int nbMax) {
 
-		if (val < nbMax) {
+		
 			if (val % 3 != 0) {
 
 				if (val % 3 == 1 && val % 2 == 0) {
 
 					if (val != 13 && val != 4 && val != 2 && val != 1) {
-
+						if ((val-1)/3 < nbMax) {
 						Zta zta = new Zta((val - 1) / 3,
 								nombre.getProfondeur() + 1);
 
 						nombre.getL().add(zta);
 						initialiser(zta, zta.getValeur(), nbMax);
-
+						}
 					}
 				}
 
@@ -177,6 +237,6 @@ public class Ztalloc {
 
 		}
 
-	}
+	
 
 }

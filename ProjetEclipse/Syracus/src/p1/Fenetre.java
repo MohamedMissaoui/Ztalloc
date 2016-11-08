@@ -24,7 +24,7 @@ public class Fenetre extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	public static final int LONGUEUR = 60;
-	public static final int LARGEUR = 20;
+	public static final int LARGEUR = 40;
 
 	public JPanel mainPan;
 	public JPanel pan;
@@ -120,6 +120,7 @@ public class Fenetre extends JFrame {
 		graph.getModel().beginUpdate();
 
 		remplir(graph, z, null);
+		//remplirEnBinaire(graph, z, null);
 
 		graph.getModel().endUpdate();
 
@@ -137,18 +138,31 @@ public class Fenetre extends JFrame {
 
 		Object parent = graph.getDefaultParent();
 		if (premier == null) {
-			premier = graph.insertVertex(parent, null, zta.getValeur() + ";("
-					+ zta.getProfondeur() + ")", 0, 0, LONGUEUR, LARGEUR);
+			premier = creerVertex(parent, graph, zta);
 		}
 
 		for (Zta z : zta.getL()) {
-			Object suivant = graph.insertVertex(parent, null, z.getValeur()
-					+ ";(" + z.getProfondeur() + ")", 0, 0, LONGUEUR, LARGEUR);
+			Object suivant = creerVertex(parent, graph, z);
 			graph.insertEdge(parent, null, "", premier, suivant);
 			remplir(graph, z, suivant);
 		}
 
 		return graph;
+	}
+	
+	private Object creerVertex(Object parent, mxGraph graph, Zta z){
+		if(z.getValeur() % 3 == 0){
+			return graph.insertVertex(parent, null, valeurAffiche(z), 0, 0, LONGUEUR, LARGEUR, "fillColor=#7EA84E");
+		} else{
+			return graph.insertVertex(parent, null, valeurAffiche(z), 0, 0, LONGUEUR, LARGEUR);
+		}
+		
+	}
+	
+	private String valeurAffiche(Zta z){
+		
+		return z.getValeur() + "\n" + Integer.toString(z.getValeur(), 2);
+		
 	}
 
 }
