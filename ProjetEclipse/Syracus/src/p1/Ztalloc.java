@@ -9,15 +9,10 @@ public class Ztalloc {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Zta zz = new Zta(1);
-
-		initialiser(zz, 1, 100);
 		
-		int profz = recupereMaxProf(zz, 0);
-		System.out.println("prof = "+profz);
-		afficher(zz, (profz));
 
-		// Fenetre f = new Fenetre();
+		Fenetre f = new Fenetre();
+		/*
 		if (args.length < 2) {
 			System.out
 					.println("Arguments obligatoires \n"
@@ -69,7 +64,7 @@ public class Ztalloc {
 			}
 
 		}
-
+*/
 	}
 //	public function getTreeHeight($catId, $height) {
 //		$arrayChild = $this->getChildArray($catId); //tableau contenu les enfants du noeud catId
