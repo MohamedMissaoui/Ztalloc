@@ -52,10 +52,12 @@ public class Ztalloc {
 						afficher(z, prof);
 					} else {
 						System.out
-								.println("rentrez la valeur maximum, un arguments nécessaire");
+								.println("rentrez la valeur maximum, un argument nécessaire");
 					}
 					break;
 				default:
+					System.out
+								.println("argument manquant algo1 ou algo2");
 
 					break;
 				}
@@ -90,7 +92,8 @@ public class Ztalloc {
 					}
 					break;
 				default:
-
+					System.out
+								.println("argument manquant algo1 ou algo2");
 					break;
 				}
 				break;
